@@ -1,0 +1,35 @@
+<div class="container" style="border: 1px solid black;">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Salary</th>
+            <th scope="col">created_at</th>
+            <th scope="col">updated_at</th>
+            <th scope="col"> Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <th scope="row">{{employee.id}}</th>
+                <td>{{employee.name}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.Salary}}</td>
+                <td>{{employee.created_at}}</td>
+                <td>{{employee.updated_at}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="openModal(employee.id)">Edit</button>
+                    <button class="btn btn-danger" (click)="confirmDelete(employee.id)">Delete</button>
+                </td>
+              </tr>
+        </tbody>
+      </table>
+      <!-- (employeeUpdated)="handleEmployeeUpdated($event)" -->
+    </div>
+<!-- Include the modal component -->
+<app-employee-modal
+  [employee]="selectedEmployee"
+  
+></app-employee-modal>

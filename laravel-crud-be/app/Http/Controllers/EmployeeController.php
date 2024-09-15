@@ -27,7 +27,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employee,email',
-            'Salary' => 'required|integer',
+            'salary' => 'required|integer',
         ]);
         
          // Create a new employee

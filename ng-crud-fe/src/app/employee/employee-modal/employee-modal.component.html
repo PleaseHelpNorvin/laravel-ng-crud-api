@@ -2,7 +2,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="employeeModalLabel">Employee Details {{employee.id}}</h5>
+          <h5 class="modal-title" id="employeeModalLabel">{{ selectedEmployee.id ? 'Edit Employee' : 'Add Employee' }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -10,21 +10,21 @@
             <form>
                 <div class="mb-3">
                     <label for="employeeName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="employeeName" name="name" value="{{employee.name}}">
+                    <input type="text" class="form-control" id="employeeName" name="name" [(ngModel)]="selectedEmployee.name">
                 </div>
                 <div class="mb-3">
-                    <label for="employeeName" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="employeeName" name="name" value="{{employee.email}}">
+                    <label for="employeeEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="employeeEmail" name="email" [(ngModel)]="selectedEmployee.email">
                 </div>
                 <div class="mb-3">
-                    <label for="employeeName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="employeeName" name="name" value="{{employee.Salary}}">
+                    <label for="employeeSalary" class="form-label">Salary</label>
+                    <input type="number" class="form-control" id="employeeSalary" name="salary" [(ngModel)]="selectedEmployee.salary">
                 </div>
             </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="saveChanges()">Save changes</button>
+          <button type="button" class="btn btn-primary" (click)="saveChanges()">{{ selectedEmployee.id ? 'Save Changes' : 'Add Employee' }}</button>
         </div>
       </div>
     </div>

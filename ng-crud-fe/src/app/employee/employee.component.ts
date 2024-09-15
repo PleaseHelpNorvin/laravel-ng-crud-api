@@ -26,20 +26,63 @@ export class EmployeeComponent {
     this.employeeService.getEmployees().subscribe((data: any[]) => {
       this.employees = data;
     });
+  } 
+  openAddModal() {
+    const modalElement = document.getElementById('employeeModal');
+    if (modalElement) {
+      const modal = (bootstrap as any).Modal.getOrCreateInstance(modalElement);
+      modal.show(); // Show the modal
+    }
+    this.selectedEmployee = {
+      id: null,
+      name: '',
+      email: '',
+      salary: ''
+    };
   }
 
-  openModal(employeeId: number) {
+  // Open modal to edit existing employee
+  openEditModal(employeeId: number) {
     this.employeeService.getEmployeeById(employeeId).subscribe((employee: any) => {
       this.selectedEmployee = employee; // Set the selected employee
   
       const modalElement = document.getElementById('employeeModal');
       if (modalElement) {
         const modal = (bootstrap as any).Modal.getOrCreateInstance(modalElement);
-        modal.show(); // Show the modal
+        modal.show();
       }
     });
   }
+
   
+  handleEmployeeUpdated(employees: any) {
+    if (employees.id) {
+      // Update existing employee
+      this.employeeService.updateEmployee(employees.id, employees).subscribe(
+        () => {
+          this.fetchEmployees(); // Refresh employee list after update
+          alert('success')
+        },
+        (error) => {
+          console.error('Update failed:', error); // Log the error details
+          alert('Failed to update employee. Please check the input data.');
+        }
+      );
+    } else {
+      // Add new employee
+      this.employeeService.addEmployee(employees).subscribe(
+        () => {
+          this.fetchEmployees(); // Refresh employee list after adding
+        },
+        (error) => {
+          console.error('Creation failed:', error); // Log the error details
+          alert('Failed to add employee. Please check the input data.');
+        }
+      );
+    }
+  }
+  
+
 
   // handleEmployeeUpdated(updatedEmployee: any) {
   //   // Handle the updated employee data, e.g., update the list

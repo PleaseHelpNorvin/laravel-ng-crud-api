@@ -1,4 +1,10 @@
 <div class="container" style="border: 1px solid black;">
+  <div>
+    <div>
+      <button type="button" class="btn btn-success" (click)="openAddModal()">Add Employee</button>
+    </div>
+    
+  </div>
     <table class="table">
         <thead>
           <tr>
@@ -16,11 +22,11 @@
                 <th scope="row">{{employee.id}}</th>
                 <td>{{employee.name}}</td>
                 <td>{{employee.email}}</td>
-                <td>{{employee.Salary}}</td>
+                <td>{{employee.salary}}</td>
                 <td>{{employee.created_at}}</td>
                 <td>{{employee.updated_at}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" (click)="openModal(employee.id)">Edit</button>
+                    <button type="button" class="btn btn-primary" (click)="openEditModal(employee.id)">Edit</button>
                     <button class="btn btn-danger" (click)="confirmDelete(employee.id)">Delete</button>
                 </td>
               </tr>
@@ -30,6 +36,6 @@
     </div>
 <!-- Include the modal component -->
 <app-employee-modal
-  [employee]="selectedEmployee"
-  
-></app-employee-modal>
+  [selectedEmployee]="selectedEmployee"
+  (employeeUpdated)="handleEmployeeUpdated($event)">
+</app-employee-modal>
